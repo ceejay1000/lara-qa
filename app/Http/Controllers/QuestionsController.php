@@ -19,7 +19,7 @@ class QuestionsController extends Controller
         $questions = Question::with('user')->latest()->paginate(5);
         return view('questions.index', ['questions' => $questions]);
         
-      //  dd(DB::getQueryLog());
+        //dd($questions->all()[0]);
     }
     /**
      * Show the form for creating a new resource.
