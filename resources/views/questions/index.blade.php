@@ -37,13 +37,20 @@
                                     <a href="{{ $question->url }}">{{ $question->title }}</a>
                                 </h3>
                                 <div class="ml-auto">
-                                    <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-info">Edit</a>
-                                    <form action="{{  route('questions.destroy', $question->id) }}" method="POST" class="form-delete">
-                                        @csrf
-                                        @method('DELETE')
+                                    <!-- @if (Auth::user()->can("update", $question))
+                                        <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-info">Edit</a>
+                                    @endif -->
+                                    @can("update", $question)
+                                        <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-info">Edit</a>
+                                    @endcan
+                                    @if (Auth::user()->can("delete", $question))                                      
+                                        <form action="{{  route('questions.destroy', $question->id) }}" method="POST" class="form-delete">
+                                            @csrf
+                                            @method('DELETE')
 
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="">Delete</button>
-                                    </form>
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="">Delete</button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                                 <p class="lead">Asked by 
