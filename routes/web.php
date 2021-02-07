@@ -20,9 +20,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/questions/create', [QuestionsController::class, 'create'])->name('questions.create');
 Route::get('/questions/{question:slug}', [QuestionsController::class, 'show'])->name('questions.show');
 
-Route::resource('questions', QuestionsController::class)->except(['show']);
+
+Route::resource('questions', QuestionsController::class)->except(['create', 'show']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
  

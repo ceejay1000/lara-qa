@@ -35,7 +35,8 @@ class QuestionsController extends Controller
     {
         $question = new Question();
 
-        return view('questions.create', compact('question'));
+       return view('questions.create', compact('question'));
+        //return view('questions.create');
     }
 
     /**

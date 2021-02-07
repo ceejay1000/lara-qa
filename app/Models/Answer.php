@@ -16,4 +16,16 @@ class Answer extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function boot(){
+        parent::boot();
+
+        static::created(function($answer){
+            echo "Answer created\n";
+        }); 
+
+        static::saved(function($answer){
+            echo "Answer saved\n";
+        }); 
+    }
 }

@@ -8,11 +8,11 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <h1>{{ $question->title }}</h1>
-                        <div class="ml-auto">
+                        <!-- <div class="ml-auto">
                             <a href="{{ route('questions.create') }}" class="btn btn-outline-secondary">
                                 Ask a question
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="card-body">
