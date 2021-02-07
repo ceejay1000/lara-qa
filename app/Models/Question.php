@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Answer;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,7 +39,7 @@ class Question extends Model
 
     public function getStatusAttribute()
     {
-        if ($this->answers > 0){
+        if ($this->answers_count > 0){
             if ($this->best_answer_id){
                 return "answered-accepted";
             }
@@ -51,5 +52,9 @@ class Question extends Model
     public function getBodyHmlAttribute()
     {
         return \Parsedown::instance()->text($this->body);
+    }
+
+    public function answers(){
+        return $this->hasMany(Answer::class);
     }
 }
