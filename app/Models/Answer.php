@@ -22,17 +22,21 @@ class Answer extends Model
         return $this->belongsTo(User::class);
     }
 
-    // public function boot(){
-    //     parent::boot();
+    //public function boot(){
+        // parent::boot();
 
-    //     static::created(function($answer){
-    //         echo "Answer created\n";
-    //     }); 
+        // static::deleted(function($answer){
+        //     $answer->question->decrement('answers_count');
+        // });
 
-    //     static::saved(function($answer){
-    //         echo "Answer saved\n";
-    //     }); 
-    // }
+        // static::created(function($answer){
+        //     echo "Answer created\n";
+        // }); 
+
+        // static::saved(function($answer){
+        //     echo "Answer saved\n";
+        // }); 
+    //}
 
     public function getCreatedDateAttribute()
     {
