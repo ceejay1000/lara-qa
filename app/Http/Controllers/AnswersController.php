@@ -69,7 +69,7 @@ class AnswersController extends Controller
     public function destroy(Question $question, Answer $answer)
     {
         $this->authorize('delete', $answer);
-
+ 
         $answer->question->decrement('answers_count');
 
         $answer->delete();

@@ -13,7 +13,8 @@ class CreateAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('answers', function (Blueprint $table) {
+    Schema::create('answers', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->id();
             $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('user_id');
