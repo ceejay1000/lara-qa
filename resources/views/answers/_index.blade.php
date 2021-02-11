@@ -23,7 +23,7 @@
                                     class="vote-accepted favourite mt-2"
                                     onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id}}').submit();"
                                 >
-                                    <span class="favourite-count">&#10004</span>8292
+                                    <span class="favourite-count">&#10004</span>
                                 </a>
                                 <form 
                                     id="accept-answer-{{ $answer->id }}" 

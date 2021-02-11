@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\FavouritesTableSeeder;
+use Database\Seeders\UsersQuestionsAnswersTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,12 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(5)->create()->each(function($user){
-            $user->questions()->saveMany(
-                \App\Models\Question::factory(rand(1, 5))->create()->make()
-            )->each(function($q){
-                $q->answers()->saveMany(factory(App\Models\Answer::class, rand(1, 5))->make());
-            });
-        });
+        $this->call([
+            UsersQuestionsAnswersTableSeeder::class,
+            FavouritesTableSeeder::class
+        ]);
     }
 }
