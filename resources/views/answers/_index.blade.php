@@ -18,9 +18,28 @@
                                 <a title="This question is not useful" class="vote-down off">
                                     <span>&#128078</span>
                                 </a>
-                                <a title="Mark as best answer" class="vote-accepted favourite mt-2">
+                              @can('accept', $answer)
+                              <a title="Mark as best answer" 
+                                    class="vote-accepted favourite mt-2"
+                                    onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id}}').submit();"
+                                >
                                     <span class="favourite-count">&#10004</span>8292
                                 </a>
+                                <form 
+                                    id="accept-answer-{{ $answer->id }}" 
+                                    action="{{ route('answers.accept', $answer->id) }}" 
+                                    method="POST" style="display: none"> 
+                                    @csrf
+                                </form>
+                                @else
+                                    @if($answer->is_best)
+                                    <a title="This has been accepted as best answer" 
+                                    class="{{ $answer->status }} mt-2"
+                                    >
+                                        <span class="favourite-count">&#10004</span>8292
+                                    </a>
+                                    @endif
+                              @endcan
                             </div>
                             <div class="media-body">
                                 {{ $answer->body }}
