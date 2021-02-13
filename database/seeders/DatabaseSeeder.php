@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\VotableTableSeeder;
 use Database\Seeders\FavouritesTableSeeder;
 use Database\Seeders\UsersQuestionsAnswersTableSeeder;
 
@@ -17,7 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UsersQuestionsAnswersTableSeeder::class,
-            FavouritesTableSeeder::class
+            FavouritesTableSeeder::class,
+            VotableTableSeeder::class
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -67,5 +68,30 @@ class User extends Authenticatable
 
     public function favourites(){
         return $this->belongsToMany(Question::class, 'favourites')-withTimestamps();
+    }
+
+    public function voteQuestions(){
+        return $this->morphedByMany(Question::class, 'votables');
+    }
+
+    public function voteAnswers(){
+        return $this->morphedByMany(Answer::class, 'votables');
+    }
+
+    public function voteQuestion(Question $question, $vote){
+        $voteQuestions = $this->voteQuestions();
+        //dd($voteQuestions);
+
+        if ($voteQuestions->where('votables_id', $question->id)->exists()){
+            $voteQuestions->updateExistingPivot($question, ['vote' => $vote]);
+        } else {
+            $voteQuestions->attach($question, ['vote' => $vote]);
+        }
+
+        $question->load('votes');
+        $downVotes = (int) $question->downVotes()->sum('vote');
+        $upVotes = (int) $question->upVotes()->sum('vote');
+        $question->votes_count = $upVotes + $downVotes;
+        $question->save();
     }
 }

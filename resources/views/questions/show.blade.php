@@ -20,15 +20,34 @@
                 </div>
                 <div class="media">
                 <div class="f-flex flex-column vote-controls">
-                    <a title="This question is useful" class="vote-up">
-                        <span>&#128077</span>
+                    <a title="This question is useful" class="vote-up {{ Auth::guest() ? 'off' : ''}}"
+                    onclick="event.preventDefault(); document.getElementById('up-vote-question-{{ $question->id }}').submit();">
+                        <span>&#128077</span>                      
                     </a>
-                    <span class="votes-count">12</span>
-                    <a title="This question is not useful" class="vote-down off">
+                    <form 
+                        id="up-vote-question-{{ $question->id }}" 
+                        action="/questions/{{ $question->id }}/vote" 
+                        method="POST" style="display: none"> 
+                        @csrf
+                        <input type="hidden" name="vote" value="1" />
+                    </form>
+                    <span class="votes-count">{{ $question->votes_count }}</span>
+
+                    <a 
+                        title="This question is not useful" 
+                        class="vote-down off {{ Auth::guest() ? 'off' : ''}}"
+                        onclick="event.preventDefault(); document.getElementById('down-vote-question-{{ $question->id }}').submit();">
                         <span>&#128078</span>
                     </a>
+                    <form 
+                        id="down-vote-question-{{ $question->id}}" 
+                        action="/questions/{{ $question->id }}/vote" 
+                        method="POST" style="display: none"> 
+                        @csrf
+                        <input type="hidden" name="vote" value="-1" />
+                    </form>
                     <a title="Click to mark as favourite question (Click again to undo)" 
-                       class="favourite mt-2 "
+                       class="favourite mt-2 {{( Auth::guest() ? 'off': $question->is_favourited) ? 'favourited': ''}}"
                        onclick="event.preventDefault(); document.getElementById('favourite-question-{{ $question->id }}').submit();">
                         <span class="favourite-count">&#127775</span>
                         <span>{{ $question->favourites_count }}</span>

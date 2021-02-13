@@ -7,6 +7,7 @@ use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\AcceptAnswerController;
+use App\Http\Controllers\VoteQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +37,5 @@ Route::resource('questions', QuestionsController::class)->except(['create', 'sho
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/questions/{question}/favourites', [FavouritesController::class, 'store'])->name('questions.favourite');
 Route::delete('/questions/{question}/favourites', [FavouritesController::class, 'destroy'])->name('questions.unfavourite');
+
+Route::post('/questions/{question}/vote', VoteQuestionController::class);
