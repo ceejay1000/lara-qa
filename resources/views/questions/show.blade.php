@@ -41,10 +41,11 @@
                         <div class="col-4"></div>
                         <div class="col-4"></div>
                         <div class="col-4">
-                            @include('shared._author', [
+                            <!-- @include('shared._author', [
                                 'model' => $question,
                                 'label' => 'asked'
-                            ])
+                            ]) -->
+                            <user-info :model="{{ $question }}" label="asked"></user-info>
                         </div>
                     </div>
                     </div>

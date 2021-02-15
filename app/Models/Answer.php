@@ -9,6 +9,8 @@ class Answer extends Model
 {
     use HasFactory;
 
+    protected $appends = ['created_date'];
+
     protected $fillable = [
         'body',
         'user_id'
