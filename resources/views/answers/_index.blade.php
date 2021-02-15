@@ -36,28 +36,7 @@
                                 @csrf
                                 <input type="hidden" name="vote" value="-1" />
                             </form>
-                              @can('accept', $answer)
-                              <a title="Mark as best answer" 
-                                    class="vote-accepted favourite mt-2"
-                                    onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id}}').submit();"
-                                >
-                                    <span class="favourite-count">&#10004</span>
-                                </a>
-                                <form 
-                                    id="accept-answer-{{ $answer->id }}" 
-                                    action="{{ route('answers.accept', $answer->id) }}" 
-                                    method="POST" style="display: none"> 
-                                    @csrf
-                                </form>
-                                @else
-                                    @if($answer->is_best)
-                                    <a title="This has been accepted as best answer" 
-                                    class="{{ $answer->status }} mt-2"
-                                    >
-                                        <span class="favourite-count">&#10004</span>8292
-                                    </a>
-                                    @endif
-                              @endcan
+                             
                             </div>
                             <div class="media-body">
                                 {{ $answer->body }}
@@ -84,7 +63,7 @@
                                     </div>
                                 <div class="col-4"></div>
                                 <div class="col-4 mt-4">
-                                    <span class="text-muted mt-4">Answered {{ $answer->created_date }}<span>
+                                    <!-- <span class="text-muted mt-4">Answered {{ $answer->created_date }}<span>
                                     <div class="media mt-4">
                                         <a href="{{ $answer->user->url }}" class="pr-2">
                                             <img src="{{ $answer->user->avatar }}" />
@@ -94,7 +73,11 @@
                                                 {{ $answer->user->name }}
                                             </a> 
                                         </div>
-                                    </div>
+                                    </div> -->
+                                    @include('shared._author', [
+                                        'model' => $answer,
+                                        'label' => 'answered'
+                                    ])
                                 </div>
                                 </div>
                             </div>
