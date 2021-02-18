@@ -23,13 +23,8 @@
                     <!-- @can("update", $question)
                         <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-sm btn-outline-info">Edit</a>
                     @endcan -->
-                    @if (Auth::user()->can("delete", $answer))                                      
-                        <form action="{{  route('questions.answers.destroy', [$question->id, $answer->id]) }}" method="POST" class="form-delete">
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="">Delete</button>
-                        </form>
+                    @if (Auth::user()->can("delete", $answer))                                     
+                        <button  class="btn btn-sm btn-outline-danger" onclick="destroy">Delete</button>
                     @endif
                     @endif
                 </div>

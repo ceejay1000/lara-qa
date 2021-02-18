@@ -13,6 +13,16 @@ export default {
     };
   },
 
+  computed: {
+    isInvalid() {
+      return this.body.length < 10;
+    },
+
+    endpoint() {
+      return `/questions/{this.questionId}/answers/${this.id}`;
+    },
+  },
+
   methods: {
     edit() {
       this.beforeEditCache = this.body;
@@ -23,9 +33,10 @@ export default {
       this.body = this.beforeEditCache;
       this.editing = false;
     },
+
     update() {
       axios
-        .patch(`/questions/{this.questionId}/answers/${this.id}`, {
+        .patch(this.endpoint, {
           body: this.body,
         })
         .then((res) => {
@@ -34,6 +45,16 @@ export default {
           this.bodyHtml = res.data.body_html;
         })
         .catch((err) => console.log(err.message));
+    },
+
+    destroy() {
+      if (confirm("Are you sure?")) {
+        axios.delete(this.endpoint).then((res) => {
+          $(this.$el).fadeOut(500, () => {
+            alert(res.data.message);
+          });
+        });
+      }
     },
   },
 };
