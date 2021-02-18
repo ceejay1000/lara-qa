@@ -19,6 +19,7 @@ export default {
     props: ['model', 'label'],
     computed: {
         postDate(){
+            
             return this.label + " " + this.model.created_date;
         }
     },
@@ -27,7 +28,12 @@ export default {
         return { 
             user: this.model.user
         }
+    },
+
+    created(){
+            console.log(this.model);
     }
+   
 }
 </script>
 
