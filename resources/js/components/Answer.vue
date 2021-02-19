@@ -64,7 +64,7 @@ export default {
         buttons: [
           [
             "<button><b>YES</b></button>",
-            function (instance, toast) {
+            (instance, toast) => {
               axios.delete(this.endpoint).then((res) => {
                 $(this.$el).fadeOut(500, () => {
                   this.$toast.success(res.data.message, "success", {
