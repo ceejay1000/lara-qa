@@ -7,7 +7,7 @@
         <span class="favourite-count">&#10004</span>
     </a>
 
-    <a v-if="isBest" title="This has been accepted as best answer" :class="classes">
+    <a v-if="accepted" title="This has been accepted as best answer" :class="classes">
         <span class="favourite-count">&#10004</span>8292
     </a>
   
@@ -51,7 +51,7 @@
             classes(){
                 return [
                     'mt-2',
-                    this.accepted() ? 'vote-accepted' : ''
+                    this.isBest() ? 'vote-accepted' : ''
                 ]
             }
         }
