@@ -84,7 +84,7 @@ class User extends Authenticatable
         $voteQuestions = $this->voteQuestions();
         //dd($voteQuestions);
 
-        $this->_vote($voteQuestions, $question, $vote);
+        return $this->_vote($voteQuestions, $question, $vote);
         // if ($voteQuestions->where('votables_id', $question->id)->exists()){
         //     $voteQuestions->updateExistingPivot($question, ['vote' => $vote]);
         // } else {
@@ -117,5 +117,7 @@ class User extends Authenticatable
         $upVotes = (int) $model->upVotes()->sum('vote');
         $model->votes_count = $upVotes + $downVotes;
         $model->save();
+
+        return $model->votes_count;
     }
 }
